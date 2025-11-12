@@ -14,12 +14,23 @@ html,
 body {
   margin: 0;
   height: 100%;
-}
-
-body {
   background-color: #000;
   color: #fff;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  animation: colorCycle 240s ease-in-out infinite;
+}
+
+@keyframes colorCycle {
+  0%, 50% {
+    background-color: #000;
+    filter: hue-rotate(0deg);
+  }
+  50.01%, 100% {
+    background-color: #1a0d1a;
+    filter: hue-rotate(320deg);
+  }
 }
 
 .hero {
@@ -28,8 +39,21 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100dvh;
-  padding: 10vmin clamp(1.5rem, 4vw, 3rem);
+  min-height: 100vh;
+  padding: clamp(2rem, 8vh, 10vmin) clamp(1rem, 4vw, 3rem);
   isolation: isolate;
+  width: 100%;
+  max-width: 100vw;
+  animation: heroColorCycle 240s ease-in-out infinite;
+}
+
+@keyframes heroColorCycle {
+  0%, 50% {
+    background-color: transparent;
+  }
+  50.01%, 100% {
+    background-color: rgba(255, 20, 147, 0.1);
+  }
 }
 
 .hero__content {
@@ -44,10 +68,141 @@ body {
 
 .hero__main-gif {
   position: relative;
-  width: clamp(15rem, 40vw, 30rem);
+  width: clamp(12rem, 85vw, 30rem);
+  max-width: 100%;
   margin: 0 auto;
   display: inline-block;
   overflow: visible;
+}
+
+.hero__main-gif--expand {
+  animation: mainGifExpand 5s ease-in-out 1800s forwards, mainGifReturn 5s ease-in-out 1805s forwards;
+}
+
+@keyframes mainGifExpand {
+  0% {
+    width: clamp(12rem, 85vw, 30rem);
+    max-width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  100% {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    margin: 0;
+  }
+}
+
+@keyframes mainGifReturn {
+  0% {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    margin: 0;
+  }
+  100% {
+    width: clamp(12rem, 85vw, 30rem);
+    max-width: 100%;
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+  }
+}
+
+.hero__main-gif--expand img {
+  animation: mainGifImageExpand 5s ease-in-out 1800s forwards, mainGifImageReturn 5s ease-in-out 1805s forwards;
+}
+
+@keyframes mainGifImageExpand {
+  0% {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@keyframes mainGifImageReturn {
+  0% {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  100% {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+.hero__main-gif--expand .neon-square {
+  animation: neonSquareHide 5s ease-in-out 1800s forwards, neonSquareShow 5s ease-in-out 1805s forwards;
+}
+
+@keyframes neonSquareHide {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes neonSquareShow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.marquee,
+.hero__bg-gifs,
+.hero__layer--fade-image,
+.hero__layer--pink-fade,
+.hero__title-overlay {
+  animation: hideOnMainGifExpand 5s ease-in-out 1800s forwards, showOnMainGifReturn 5s ease-in-out 1805s forwards;
+}
+
+@keyframes hideOnMainGifExpand {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes showOnMainGifReturn {
+  0% {
+    opacity: 0;
+    pointer-events: none;
+  }
+  100% {
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 
 .hero__main-gif img {
@@ -58,21 +213,30 @@ body {
   z-index: 1;
 }
 
-.hero__title-overlay {
+.hero__title-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 3;
+  pointer-events: none;
+  display: inline-block;
+}
+
+.hero__title-overlay {
+  position: relative;
   margin: 0;
+  padding: 0.2em 0.4em;
   font-size: clamp(3rem, 10vw, 8rem);
   letter-spacing: 0.3em;
   text-transform: uppercase;
   font-weight: 800;
   color: #fff;
   text-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 0, 0, 0.6);
-  z-index: 3;
-  pointer-events: none;
+  white-space: nowrap;
+  display: inline-block;
 }
+
 
 .neon-square {
   position: absolute;
@@ -82,6 +246,7 @@ body {
   pointer-events: none;
   transform-origin: center center;
 }
+
 
 .neon-line {
   position: absolute;
@@ -257,40 +422,63 @@ body {
   }
 }
 
+.hero__layer--pink-fade {
+  z-index: 1;
+}
+
+.hero__pink-fade-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: originalFadeIn 3s ease-in-out 30s forwards;
+}
+
+@keyframes originalFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
 .marquee {
   position: absolute;
-  bottom: clamp(3rem, 10vh, 6rem);
+  bottom: clamp(1.5rem, 5vh, 6rem);
   width: 100%;
+  max-width: 100vw;
   overflow: hidden;
   z-index: 1;
   mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(0, 0, 0, 1) 25%,
-    rgba(0, 0, 0, 1) 75%,
+    rgba(0, 0, 0, 1) 15%,
+    rgba(0, 0, 0, 1) 85%,
     transparent 100%
   );
 }
 
 .marquee--top {
-  top: clamp(3rem, 10vh, 6rem);
+  top: clamp(1.5rem, 5vh, 6rem);
   bottom: auto;
 }
 
 .marquee__track {
   display: flex;
-  gap: clamp(1rem, 4vw, 4rem);
+  gap: clamp(0.5rem, 3vw, 4rem);
   animation: marqueeSlide 14s linear infinite;
   will-change: transform;
 }
 
 .marquee__item {
-  font-size: clamp(1.4rem, 4vw, 3rem);
+  font-size: clamp(1rem, 5vw, 3rem);
   font-weight: 700;
-  letter-spacing: 0.6em;
+  letter-spacing: clamp(0.2em, 1vw, 0.6em);
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .marquee__item::after {
@@ -332,6 +520,15 @@ body {
   mix-blend-mode: screen;
 }
 
+@keyframes dancingFade {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
 .hero__bg-gif img {
   display: block;
   width: 100%;
@@ -343,84 +540,84 @@ body {
   width: clamp(8rem, 15vw, 12rem);
   top: 10%;
   left: 5%;
-  animation: dance1 8s ease-in-out infinite;
+  animation: dance1 8s ease-in-out infinite, dancingFade 4s ease-in-out infinite;
 }
 
 .hero__bg-gif--2 {
   width: clamp(6rem, 12vw, 10rem);
   top: 20%;
   right: 8%;
-  animation: dance2 10s ease-in-out infinite;
+  animation: dance2 10s ease-in-out infinite, dancingFade 4.5s ease-in-out infinite;
 }
 
 .hero__bg-gif--3 {
   width: clamp(7rem, 14vw, 11rem);
   bottom: 25%;
   left: 10%;
-  animation: dance3 9s ease-in-out infinite;
+  animation: dance3 9s ease-in-out infinite, dancingFade 5s ease-in-out infinite;
 }
 
 .hero__bg-gif--4 {
   width: clamp(9rem, 16vw, 13rem);
   bottom: 15%;
   right: 12%;
-  animation: dance4 11s ease-in-out infinite;
+  animation: dance4 11s ease-in-out infinite, dancingFade 3.5s ease-in-out infinite;
 }
 
 .hero__bg-gif--5 {
   width: clamp(5rem, 10vw, 8rem);
   top: 50%;
   left: 2%;
-  animation: dance5 7s ease-in-out infinite;
+  animation: dance5 7s ease-in-out infinite, dancingFade 4.2s ease-in-out infinite;
 }
 
 .hero__bg-gif--6 {
   width: clamp(6rem, 12vw, 9rem);
   top: 60%;
   right: 5%;
-  animation: dance6 8.5s ease-in-out infinite;
+  animation: dance6 8.5s ease-in-out infinite, dancingFade 5.5s ease-in-out infinite;
 }
 
 .hero__bg-gif--7 {
   width: clamp(7rem, 13vw, 10rem);
   top: 15%;
   left: 50%;
-  animation: dance7 9.5s ease-in-out infinite;
+  animation: dance7 9.5s ease-in-out infinite, dancingFade 3.8s ease-in-out infinite;
 }
 
 .hero__bg-gif--8 {
   width: clamp(8rem, 15vw, 11rem);
   bottom: 40%;
   left: 45%;
-  animation: dance8 10.5s ease-in-out infinite;
+  animation: dance8 10.5s ease-in-out infinite, dancingFade 4.8s ease-in-out infinite;
 }
 
 .hero__bg-gif--9 {
   width: clamp(5rem, 11vw, 9rem);
   top: 35%;
   right: 20%;
-  animation: dance9 7.5s ease-in-out infinite;
+  animation: dance9 7.5s ease-in-out infinite, dancingFade 5.2s ease-in-out infinite;
 }
 
 .hero__bg-gif--10 {
   width: clamp(6rem, 13vw, 10rem);
   bottom: 30%;
   right: 25%;
-  animation: dance10 8.8s ease-in-out infinite;
+  animation: dance10 8.8s ease-in-out infinite, dancingFade 3.2s ease-in-out infinite;
 }
 
 .hero__bg-gif--11 {
   width: clamp(7rem, 14vw, 12rem);
   top: 70%;
   left: 30%;
-  animation: dance11 9.2s ease-in-out infinite;
+  animation: dance11 9.2s ease-in-out infinite, dancingFade 4.6s ease-in-out infinite;
 }
 
 .hero__bg-gif--12 {
   width: clamp(5rem, 10vw, 8rem);
   top: 5%;
   left: 25%;
-  animation: dance12 7.8s ease-in-out infinite;
+  animation: dance12 7.8s ease-in-out infinite, dancingFade 5.8s ease-in-out infinite;
 }
 
 /* Dancing animations */
@@ -595,6 +792,160 @@ body {
   }
   75% {
     transform: translate(25px, 15px) rotate(4deg) scale(1.08);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    padding: clamp(4rem, 12vh, 6rem) 1rem clamp(4rem, 12vh, 6rem) 1rem;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .hero__content {
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  .hero__main-gif {
+    width: clamp(10rem, 85vw, 20rem);
+    max-width: 90vw;
+  }
+
+  .hero__title-overlay {
+    font-size: clamp(1.8rem, 7vw, 3.5rem);
+    letter-spacing: clamp(0.05em, 0.3vw, 0.2em);
+    padding: 0 0.5rem;
+    word-break: keep-all;
+    white-space: nowrap;
+  }
+
+  .marquee {
+    bottom: clamp(0.5rem, 2vh, 1.5rem);
+    width: 100vw;
+    left: 0;
+    right: 0;
+  }
+
+  .marquee--top {
+    top: clamp(0.5rem, 2vh, 1.5rem);
+  }
+
+  .marquee__item {
+    font-size: clamp(0.75rem, 3.5vw, 1.5rem);
+    letter-spacing: clamp(0.05em, 0.2vw, 0.3em);
+  }
+
+  .marquee__item::after {
+    margin-left: clamp(0.5rem, 2vw, 1.5rem);
+  }
+
+  .neon-line--top,
+  .neon-line--bottom {
+    height: 2px;
+  }
+
+  .neon-line--left,
+  .neon-line--right {
+    width: 2px;
+  }
+
+  .hero__layer--fade-image {
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: clamp(3.5rem, 10vh, 5rem) 0.75rem clamp(3.5rem, 10vh, 5rem) 0.75rem;
+  }
+
+  .hero__main-gif {
+    width: clamp(8rem, 90vw, 16rem);
+    max-width: 90vw;
+  }
+
+  .hero__title-overlay {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    letter-spacing: 0.05em;
+    padding: 0 0.25rem;
+  }
+
+  .marquee {
+    bottom: clamp(0.25rem, 1vh, 1rem);
+  }
+
+  .marquee--top {
+    top: clamp(0.25rem, 1vh, 1rem);
+  }
+
+  .marquee__item {
+    font-size: clamp(0.65rem, 3vw, 1.2rem);
+    letter-spacing: 0.05em;
+  }
+
+  .marquee__track {
+    gap: clamp(0.25rem, 2vw, 1rem);
+  }
+}
+
+@media (max-width: 360px) {
+  .hero {
+    padding: clamp(3rem, 8vh, 4rem) 0.5rem;
+  }
+
+  .hero__main-gif {
+    width: clamp(7rem, 88vw, 14rem);
+  }
+
+  .hero__title-overlay {
+    font-size: clamp(1.2rem, 5.5vw, 2rem);
+  }
+
+  .marquee__item {
+    font-size: clamp(0.6rem, 2.5vw, 1rem);
+  }
+}
+
+@media (min-width: 1920px) {
+  .hero__main-gif {
+    width: clamp(25rem, 35vw, 35rem);
+  }
+
+  .hero__title-overlay {
+    font-size: clamp(4rem, 8vw, 10rem);
+  }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .hero {
+    padding: clamp(1rem, 4vh, 2rem) clamp(1rem, 4vw, 3rem);
+    min-height: 100vh;
+  }
+
+  .hero__main-gif {
+    width: clamp(8rem, 40vh, 20rem);
+  }
+
+  .hero__title-overlay {
+    font-size: clamp(1.5rem, 6vh, 3rem);
+  }
+
+  .marquee {
+    bottom: clamp(0.25rem, 1vh, 1rem);
+  }
+
+  .marquee--top {
+    top: clamp(0.25rem, 1vh, 1rem);
+  }
+
+  .marquee__item {
+    font-size: clamp(0.7rem, 2.5vh, 1.5rem);
   }
 }
 
