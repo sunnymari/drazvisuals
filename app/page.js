@@ -1,0 +1,55 @@
+export default function Home() {
+  return (
+    <main className="hero">
+      <div className="hero__layer hero__layer--rings" aria-hidden="true" />
+      <div className="hero__layer hero__layer--fade" aria-hidden="true" />
+      
+      <div className="hero__layer hero__layer--fade-image">
+        <img
+          src="/bladerunner-2049.gif"
+          alt=""
+          className="hero__fade-image"
+          loading="lazy"
+        />
+      </div>
+      
+      <div className="marquee marquee--top" aria-hidden="true">
+        <div className="marquee__track">
+          {Array.from({ length: 20 }, (_, index) => (
+            <span key={index} className="marquee__item">
+              DRAZ
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <section className="hero__content">
+        <div className="hero__main-gif">
+          <div className="neon-square">
+            <div className="neon-line neon-line--top"></div>
+            <div className="neon-line neon-line--right"></div>
+            <div className="neon-line neon-line--bottom"></div>
+            <div className="neon-line neon-line--left"></div>
+          </div>
+          <img
+            src="/main.gif"
+            alt=""
+            loading="lazy"
+          />
+          <h1 className="hero__title-overlay">DRAZ</h1>
+        </div>
+      </section>
+
+      <div className="marquee" aria-hidden="true">
+        <div className="marquee__track">
+          {Array.from({ length: 20 }, (_, index) => (
+            <span key={index} className="marquee__item">
+              DRAZ
+            </span>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
+
