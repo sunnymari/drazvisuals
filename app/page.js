@@ -1,92 +1,60 @@
 import AngelArt from "./AngelArt";
+import FilmSection from "./FilmSection";
+import NaylLogo from "./NaylLogo";
+
+const marquee = Array.from({ length: 16 }, (_, index) => (
+  <span key={index} className="marquee__item">
+    NAYL × IZIK
+  </span>
+));
 
 export default function Home() {
   return (
-    <main className="hero">
-      <div className="hero__layer hero__layer--rings" aria-hidden="true" />
-      <div className="hero__layer hero__layer--fade" aria-hidden="true" />
-      
-      <div className="hero__layer hero__layer--fade-image">
-        <img
-          src="/bladerunner-2049.gif"
-          alt=""
-          className="hero__fade-image"
-          loading="lazy"
+    <main>
+      <section className="hero">
+        <video
+          className="hero__bg"
+          src="/nayl-film.mp4"
+          poster="/nayl-poster.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
         />
-      </div>
-      
-      <div className="hero__layer hero__layer--pink-fade">
-        <img
-          src="/hq720.jpg"
-          alt=""
-          className="hero__pink-fade-image"
-          loading="lazy"
-        />
-      </div>
-      
-      <div className="hero__bg-gifs" aria-hidden="true">
-        {Array.from({ length: 12 }, (_, index) => (
-          <div key={index} className={`hero__bg-gif hero__bg-gif--${index + 1}`}>
-            <img
-              src="/dancing.gif"
-              alt=""
-              loading="lazy"
-            />
-          </div>
-        ))}
-      </div>
+        <img className="hero__bladerunner" src="/bladerunner-2049.gif" alt="" aria-hidden="true" />
+        <div className="hero__shaft" aria-hidden="true" />
+        <div className="hero__red" aria-hidden="true" />
+        <div className="hero__vignette" aria-hidden="true" />
+        <div className="hero__grain" aria-hidden="true" />
 
-      <div className="marquee marquee--top" aria-hidden="true">
-        <div className="marquee__track">
-          {Array.from({ length: 20 }, (_, index) => (
-            <span key={index} className="marquee__item">
-              NAYL × IZIK
-            </span>
-          ))}
+        <div className="marquee marquee--top" aria-hidden="true">
+          <div className="marquee__track">{marquee}</div>
         </div>
-      </div>
 
-      <figure className="artist-credit">
-        <AngelArt />
-        <figcaption className="artist-credit__caption">
-          <span className="artist-credit__label">Artist</span>
-          <span className="artist-credit__name">Mari Summers</span>
-        </figcaption>
-      </figure>
+        <figure className="artist-credit">
+          <AngelArt />
+          <figcaption className="artist-credit__caption">
+            <span className="artist-credit__label">Artist</span>
+            <span className="artist-credit__name">Mari Summers</span>
+          </figcaption>
+        </figure>
 
-      <section className="hero__content">
-        <div className="hero__main-gif hero__main-gif--expand">
-          <div className="neon-square">
-            <div className="neon-line neon-line--top"></div>
-            <div className="neon-line neon-line--right"></div>
-            <div className="neon-line neon-line--bottom"></div>
-            <div className="neon-line neon-line--left"></div>
-          </div>
-          <img
-            src="/main.gif"
-            alt=""
-            loading="lazy"
-          />
-          <div className="hero__title-wrapper">
-            <h1 className="hero__title-overlay">
-              <span className="hero__title-name">NAYL</span>
-              <span className="hero__title-sep">×</span>
-              <span className="hero__title-name">IZIK</span>
-            </h1>
-          </div>
+        <h1 className="hero__title">
+          <span className="sr-only">NAYL × IZIK</span>
+          <NaylLogo />
+        </h1>
+
+        <a className="hero__scroll" href="#film">
+          <span>Film</span>
+        </a>
+
+        <div className="marquee marquee--bottom" aria-hidden="true">
+          <div className="marquee__track">{marquee}</div>
         </div>
       </section>
 
-      <div className="marquee" aria-hidden="true">
-        <div className="marquee__track">
-          {Array.from({ length: 20 }, (_, index) => (
-            <span key={index} className="marquee__item">
-              NAYL × IZIK
-            </span>
-          ))}
-        </div>
-      </div>
+      <FilmSection />
     </main>
   );
 }
-
