@@ -44,6 +44,19 @@ export default function Home() {
         </div>
       </div>
 
+      <figure className="artist-credit">
+        <div className="artist-credit__frame">
+          <img
+            src="/angel.webp"
+            alt="Collage of Mari Summers as an angel with blue wings and a halo, kneeling on a red rose"
+          />
+        </div>
+        <figcaption className="artist-credit__caption">
+          <span className="artist-credit__label">Artist</span>
+          <span className="artist-credit__name">Mari Summers</span>
+        </figcaption>
+      </figure>
+
       <section className="hero__content">
         <div className="hero__main-gif hero__main-gif--expand">
           <div className="neon-square">
