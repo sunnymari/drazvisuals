@@ -1,3 +1,5 @@
+import AngelArt from "./AngelArt";
+
 export default function Home() {
   return (
     <main className="hero">
@@ -45,12 +47,7 @@ export default function Home() {
       </div>
 
       <figure className="artist-credit">
-        <div className="artist-credit__frame">
-          <img
-            src="/angel.webp"
-            alt="Collage of Mari Summers as an angel with blue wings and a halo, kneeling on a red rose"
-          />
-        </div>
+        <AngelArt />
         <figcaption className="artist-credit__caption">
           <span className="artist-credit__label">Artist</span>
           <span className="artist-credit__name">Mari Summers</span>

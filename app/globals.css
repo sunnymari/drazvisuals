@@ -208,7 +208,8 @@ body {
   margin: 0;
   padding: 0.2em 0.4em;
   font-size: clamp(3rem, 10vw, 8rem);
-  letter-spacing: 0.3em;
+  --title-ls: 0.3em;
+  letter-spacing: var(--title-ls);
   text-transform: uppercase;
   font-weight: 800;
   color: #fff;
@@ -226,8 +227,8 @@ body {
 
 .hero__title-name {
   display: block;
-  /* offset trailing letter-spacing so names sit optically centered */
-  margin-right: -0.3em;
+  /* cancel the trailing letter-spacing so each name is truly centered */
+  margin-right: calc(-1 * var(--title-ls));
 }
 
 .hero__title-sep {
@@ -487,20 +488,12 @@ body {
 
 .artist-credit__frame {
   width: clamp(7rem, 12vw, 11rem);
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15), 0 0 40px rgba(0, 0, 0, 0.8);
   line-height: 0;
 }
 
-.artist-credit__frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 45%;
-  transform: scale(1.7);
-  transform-origin: 54% 52%;
+.artist-credit__frame .ap-stage {
+  filter: grayscale(1);
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .artist-credit__caption {
@@ -894,7 +887,8 @@ body {
 
   .hero__title-overlay {
     font-size: clamp(1.8rem, 7vw, 3.5rem);
-    letter-spacing: clamp(0.05em, 0.3vw, 0.2em);
+    --title-ls: clamp(0.05em, 0.3vw, 0.2em);
+    letter-spacing: var(--title-ls);
     padding: 0 0.5rem;
     word-break: keep-all;
     white-space: nowrap;
@@ -950,7 +944,8 @@ body {
 
   .hero__title-overlay {
     font-size: clamp(1.5rem, 6vw, 2.5rem);
-    letter-spacing: 0.05em;
+    --title-ls: 0.05em;
+    letter-spacing: var(--title-ls);
     padding: 0 0.25rem;
   }
 
