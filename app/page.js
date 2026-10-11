@@ -38,7 +38,7 @@ export default function Home() {
         <div className="marquee__track">
           {Array.from({ length: 20 }, (_, index) => (
             <span key={index} className="marquee__item">
-              DRAZ
+              NAYL
             </span>
           ))}
         </div>
@@ -58,7 +58,7 @@ export default function Home() {
             loading="lazy"
           />
           <div className="hero__title-wrapper">
-            <h1 className="hero__title-overlay">DRAZ</h1>
+            <h1 className="hero__title-overlay">NAYL</h1>
           </div>
         </div>
       </section>
@@ -67,7 +67,7 @@ export default function Home() {
         <div className="marquee__track">
           {Array.from({ length: 20 }, (_, index) => (
             <span key={index} className="marquee__item">
-              DRAZ
+              NAYL
             </span>
           ))}
         </div>

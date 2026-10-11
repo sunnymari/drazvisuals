@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Draz Visuals",
-  description: "Black and white motion visuals featuring Draz."
+  title: "Nayl Visuals",
+  description: "Black and white motion visuals featuring Nayl."
 };
 
 export default function RootLayout({ children }) {
