@@ -1,10 +1,10 @@
 import AngelArt from "./AngelArt";
 import FilmSection from "./FilmSection";
-import NaylLogo from "./NaylLogo";
+import Logo from "./Logo";
 
 const marquee = Array.from({ length: 16 }, (_, index) => (
   <span key={index} className="marquee__item">
-    NAYL × IZIK
+    CALVIN COPPERMAN
   </span>
 ));
 
@@ -14,8 +14,8 @@ export default function Home() {
       <section className="hero">
         <video
           className="hero__bg"
-          src="/nayl-film.mp4"
-          poster="/nayl-poster.jpg"
+          src="/film.mp4"
+          poster="/film-poster.jpg"
           autoPlay
           muted
           loop
@@ -34,15 +34,16 @@ export default function Home() {
 
         <figure className="artist-credit">
           <AngelArt />
+          <img className="artist-credit__corgi" src="/corgi.png" alt="Corgi" />
           <figcaption className="artist-credit__caption">
             <span className="artist-credit__label">Artist</span>
-            <span className="artist-credit__name">Mari Summers</span>
+            <span className="artist-credit__name">Calvin Copperman</span>
           </figcaption>
         </figure>
 
         <h1 className="hero__title">
-          <span className="sr-only">NAYL × IZIK</span>
-          <NaylLogo />
+          <span className="sr-only">Calvin Copperman</span>
+          <Logo />
         </h1>
 
         <a className="hero__scroll" href="#film">

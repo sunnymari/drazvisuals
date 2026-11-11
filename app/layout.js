@@ -4,8 +4,8 @@ import "./globals.css";
 const jost = Jost({ subsets: ["latin"], weight: ["200", "300", "500"] });
 
 export const metadata = {
-  title: "Nayl × Izik Visuals",
-  description: "NAYL × IZIK. Black and white motion visuals, art by Mari Summers."
+  title: "Calvin Copperman",
+  description: "Calvin Copperman. Black and white motion visuals."
 };
 
 export default function RootLayout({ children }) {

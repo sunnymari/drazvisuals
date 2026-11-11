@@ -1,28 +1,33 @@
 "use client";
 
-// Animated NAYL × IZIK logotype, choreographed after the NAYL title film:
+// Animated CALVIN COPPERMAN logotype. Same choreography as the title film:
 // push-in (letters swell and thicken) → pull-back (thin, wide) → starburst
-// flare on the Λ → Λ flicker with red light → shatter into shards and
-// reassemble → Λ closes into a glowing Δ under a big flare. Loops.
+// flare on the A → A flicker with red light → shatter into shards and
+// reassemble → A closes into a glowing triangle under a big flare. Loops.
 //
 // Every letter is built from straight strokes so each stroke can split into
 // shards. Coordinates: letters are 100 units tall, origin top-left.
+// The A is drawn as a lambda so the flare and closing bar have an apex.
 
 import { useEffect, useRef } from "react";
 
 const LETTERS = {
-  N: { w: 70, s: [[0, 100, 0, 0], [0, 0, 70, 100], [70, 100, 70, 0]] },
+  C: { w: 58, s: [[58, 0, 0, 0], [0, 0, 0, 100], [0, 100, 58, 100]] },
   Λ: { w: 90, s: [[0, 100, 45, 0], [45, 0, 90, 100]] },
-  Y: { w: 80, s: [[0, 0, 40, 48], [80, 0, 40, 48], [40, 48, 40, 100]] },
   L: { w: 62, s: [[0, 0, 0, 100], [0, 100, 62, 100]] },
+  V: { w: 76, s: [[0, 0, 38, 100], [38, 100, 76, 0]] },
   I: { w: 0, s: [[0, 0, 0, 100]] },
-  Z: { w: 72, s: [[0, 0, 72, 0], [72, 0, 0, 100], [0, 100, 72, 100]] },
-  K: { w: 66, s: [[0, 0, 0, 100], [62, 0, 0, 58], [24, 36, 66, 100]] },
+  N: { w: 70, s: [[0, 100, 0, 0], [0, 0, 70, 100], [70, 100, 70, 0]] },
+  O: { w: 66, s: [[0, 0, 66, 0], [66, 0, 66, 100], [66, 100, 0, 100], [0, 100, 0, 0]] },
+  P: { w: 52, s: [[0, 0, 0, 100], [0, 0, 46, 0], [46, 0, 46, 46], [46, 46, 0, 46]] },
+  E: { w: 50, s: [[48, 0, 0, 0], [0, 0, 0, 100], [0, 100, 48, 100], [0, 50, 36, 50]] },
+  R: { w: 60, s: [[0, 0, 0, 100], [0, 0, 46, 0], [46, 0, 46, 48], [46, 48, 0, 48], [22, 48, 60, 100]] },
+  M: { w: 86, s: [[0, 100, 0, 0], [0, 0, 43, 100], [43, 100, 86, 0], [86, 0, 86, 100]] },
 };
 
 const ROWS = [
-  { word: ["N", "Λ", "Y", "L"], y: -135 },
-  { word: ["I", "Z", "I", "K"], y: 35 },
+  { word: ["C", "Λ", "L", "V", "I", "N"], y: -135 },
+  { word: ["C", "O", "P", "P", "E", "R", "M", "Λ", "N"], y: 35 },
 ];
 
 const LOOP = 24; // seconds
@@ -70,7 +75,7 @@ function shatterAt(t) {
 }
 
 // ---- component ---------------------------------------------------------
-export default function NaylLogo() {
+export default function Logo() {
   const svgRef = useRef(null);
 
   useEffect(() => {
@@ -80,7 +85,6 @@ export default function NaylLogo() {
     const glow = svg.querySelector(".logo-glow");
     const flare = svg.querySelector(".logo-flare");
     const delta = svg.querySelectorAll(".logo-delta");
-    const cross = svg.querySelector(".logo-x");
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     // build shards: each stroke splits into two halves with their own flight path
@@ -166,7 +170,7 @@ export default function NaylLogo() {
           el.style.opacity = hidden ? 0 : 1;
         }
       }
-      // Λ apex sits at x + 45 of the second letter on the first row
+      // A apex sits at x + 45 of the second letter on the first row
       const apexX = xs[0][1] + 45;
       const apexY = ROWS[0].y;
 
@@ -178,7 +182,7 @@ export default function NaylLogo() {
       flare.setAttribute("transform", `translate(${apexX} ${apexY}) scale(${0.4 + f * 0.9})`);
       flare.style.opacity = f;
 
-      // the Δ crossbar only appears in the finale
+      // the closing bar on the A only appears in the finale
       const d = reduce ? 0 : ramp(t, 21, 21.8) * (1 - ramp(t, 23.4, 24));
       delta.forEach((el) => {
         el.setAttribute("x1", xs[0][1] + 18);
@@ -189,8 +193,6 @@ export default function NaylLogo() {
       });
       delta[0].style.strokeWidth = weight * 2.2; // glow copy comes first in the DOM
       delta[1].style.strokeWidth = weight;
-
-      cross.style.opacity = draw * (1 - Math.min(1, shatter));
 
       const px = reduce ? 0 : pointerX * 18;
       const py = reduce ? 0 : pointerY * 12;
@@ -230,7 +232,7 @@ export default function NaylLogo() {
     <svg
       ref={svgRef}
       className="logo"
-      viewBox="-420 -260 840 520"
+      viewBox="-720 -260 1440 520"
       aria-hidden="true"
     >
       <defs>
@@ -262,14 +264,9 @@ export default function NaylLogo() {
         <g className="logo-strokes" />
         <line className="logo-delta" pathLength="1" />
 
-        <g className="logo-x">
-          <line x1="-11" y1="-11" x2="11" y2="11" />
-          <line x1="11" y1="-11" x2="-11" y2="11" />
-        </g>
-
         <g className="logo-flare">
-          <ellipse rx="420" ry="3.5" fill="url(#flare-h)" opacity="0.9" />
-          <ellipse rx="260" ry="14" fill="url(#flare-h)" opacity="0.25" />
+          <ellipse rx="700" ry="3.5" fill="url(#flare-h)" opacity="0.9" />
+          <ellipse rx="460" ry="14" fill="url(#flare-h)" opacity="0.25" />
           <rect x="-1.6" y="-230" width="3.2" height="460" fill="url(#flare-v)" />
           <path d="M0,-44 L5,-5 L44,0 L5,5 L0,44 L-5,5 L-44,0 L-5,-5 Z" fill="#fff" />
           <circle r="34" fill="url(#flare-core)" />

@@ -17,13 +17,13 @@ export default function FilmSection() {
     <section id="film" className="film">
       <header className="film__header">
         <span className="film__label">Title Film</span>
-        <span className="film__name">NAYL</span>
+        <span className="film__name">Calvin Copperman</span>
       </header>
       <div className="film__frame">
         <video
           ref={videoRef}
-          src="/nayl-film.mp4"
-          poster="/nayl-poster.jpg"
+          src="/film.mp4"
+          poster="/film-poster.jpg"
           autoPlay
           muted
           loop

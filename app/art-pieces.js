@@ -1,4 +1,4 @@
-// Animated art pieces for marissacodes.com (Art section).
+// Animated art pieces (Art section).
 // Framework free. Works in React, Vite, plain HTML.
 //
 //   import { mountPiece, PIECES } from './art-pieces.js';
