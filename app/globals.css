@@ -185,13 +185,6 @@ html {
   stroke: #e8eeff;
 }
 
-.logo-x line {
-  stroke: #fff;
-  stroke-width: 1.5;
-  stroke-dasharray: none;
-  opacity: 0.75;
-}
-
 .logo-flare {
   mix-blend-mode: screen;
   pointer-events: none;
@@ -307,6 +300,13 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
+.artist-credit__corgi {
+  width: clamp(3.25rem, 6vw, 4.5rem);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.7));
+}
+
 .artist-credit__caption {
   display: flex;
   flex-direction: column;
@@ -326,10 +326,10 @@ html {
 }
 
 .artist-credit__name {
-  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  font-size: clamp(0.68rem, 0.9vw, 0.82rem);
   font-weight: 300;
-  letter-spacing: 0.35em;
-  margin-right: -0.35em;
+  letter-spacing: 0.18em;
+  margin-right: -0.18em;
   white-space: nowrap;
 }
 
@@ -363,10 +363,12 @@ html {
 }
 
 .film__name {
-  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-size: clamp(0.85rem, 2.1vw, 1.5rem);
   font-weight: 200;
-  letter-spacing: 0.7em;
-  margin-right: -0.7em;
+  letter-spacing: 0.28em;
+  margin-right: -0.28em;
+  max-width: 100%;
+  text-align: center;
 }
 
 .film__frame {
